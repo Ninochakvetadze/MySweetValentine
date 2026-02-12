@@ -1,32 +1,67 @@
-let offsetX = 0;
-let offsetY = 0;
+let noCount = 0;
+let noScale = 1;
 
-function moveNo() {
-    const maxMove = window.innerWidth < 600 ? 120 : 300;
+const noBtn = document.querySelector(".no");
+const response = document.getElementById("response");
 
-    offsetX = (Math.random() - 0.5) * maxMove;
-    offsetY = (Math.random() - 0.5) * maxMove;
-
-    const noBtn = document.querySelector(".no");
-    noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+function isMobile() {
+    return window.innerWidth <= 600;
 }
 
-function noClick() {
-    if (window.innerWidth < 600) {
-        moveNo();
-        document.getElementById("response").innerText = " კარგად დაფიქრდი... 😏";
+function handleNoInteraction() {
+    noCount++;
+
+    noScale -= 0.15;
+    if (noScale < 0.2) noScale = 0.2;
+
+    
+    const maxMove = isMobile() ? 120 : 300;
+    const offsetX = (Math.random() - 0.5) * maxMove;
+    const offsetY = (Math.random() - 0.5) * maxMove;
+
+    noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${noScale})`;
+
+    if (noCount < 5) {
+        response.innerText = " კარგად დაფიქრდი... 😌";
     }
+
+    if (noCount === 5) {
+    response.innerText = " შოთა… არჩევანი არ გაქვს. 😈";
+    noBtn.style.opacity = "0.2";
+
+    const yesBtn = document.querySelector(".yes");
+    yesBtn.classList.add("pulse");
 }
+
+}
+
+
+noBtn.addEventListener("mouseover", function () {
+    if (!isMobile()) {
+        handleNoInteraction();
+    }
+});
+
+
+noBtn.addEventListener("click", function () {
+    if (isMobile()) {
+        handleNoInteraction();
+    }
+});
 
 function yesClick() {
-    document.getElementById("response").innerText = "✅ პასუხი სწორია";
+    const yesBtn = document.querySelector(".yes");
+
+   
+    yesBtn.classList.remove("pulse");
+
+    response.innerText = " სწორი არჩევანია! 💘 ";
     createHearts();
 }
 
 function createHearts() {
     const card = document.querySelector(".card");
-
-    const range = window.innerWidth < 600 ? 300 : 800;
+    const range = isMobile() ? 300 : 800;
 
     for (let i = 0; i < 125; i++) {
         const heart = document.createElement("div");
@@ -46,5 +81,3 @@ function createHearts() {
         setTimeout(() => heart.remove(), 1500);
     }
 }
-
-
