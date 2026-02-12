@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" href="favicon.png" type="image/png">
 
     <title> 14.02.2026 </title>
@@ -10,7 +11,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<audio id="failSound">
+    <source src="sounds/fail.mp3" type="audio/mpeg">
+</audio>
+<audio id="yesSound">
+    <source src="sounds/yes.mp3" type="audio/mpeg">
+</audio>
 <div class="card">
     <h1>MR. Shota  <br><br>Will you be my Valentine? 💘  </h1>
 
@@ -22,7 +28,7 @@
 </button>
 
     </div>
-
+    <div id="failsound"> </div>
     <div id="response"> </div>
 </div>
 

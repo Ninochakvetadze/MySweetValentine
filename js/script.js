@@ -3,12 +3,24 @@ let noScale = 1;
 
 const noBtn = document.querySelector(".no");
 const response = document.getElementById("response");
+const failSound = document.getElementById("failSound");
+const yesSound = document.getElementById("yesSound");
+
+let failPlayed = false;
+let yesPlayed = false;
+
 
 function isMobile() {
     return window.innerWidth <= 600;
 }
 
 function handleNoInteraction() {
+    if (!failPlayed) {
+    failSound.currentTime = 0;
+    failSound.play();
+    failPlayed = true;
+}
+
     noCount++;
 
     noScale -= 0.15;
@@ -52,12 +64,18 @@ noBtn.addEventListener("click", function () {
 function yesClick() {
     const yesBtn = document.querySelector(".yes");
 
-   
     yesBtn.classList.remove("pulse");
+
+    if (!yesPlayed) {
+        yesSound.currentTime = 0;
+        yesSound.play();
+        yesPlayed = true;
+    }
 
     response.innerText = " სწორი არჩევანია! 💘 ";
     createHearts();
 }
+
 
 function createHearts() {
     const card = document.querySelector(".card");
