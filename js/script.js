@@ -38,7 +38,7 @@ function handleNoInteraction() {
     }
 
     if (noCount === 5) {
-    response.innerText = " შოთა… არჩევანი არ გაქვს. 😈";
+    response.innerText = " როგორც ჩანს, არჩევანი არ გაქვს. 😈";
     noBtn.style.opacity = "0.2";
 
     const yesBtn = document.querySelector(".yes");
